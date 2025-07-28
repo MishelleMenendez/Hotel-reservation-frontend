@@ -1,1 +1,23 @@
-<p>reservation-form works!</p>
+<div class="form-container">
+    <h2>Reservar habitación</h2>
+    <form (ngSubmit)="submitReservation()" [formGroup]="reservationForm">
+      <label>Fecha de entrada</label>
+      <input type="date" formControlName="check_in" required>
+  
+      <label>Fecha de salida</label>
+      <input type="date" formControlName="check_out" required>
+  
+      <label>Hotel</label>
+      <select formControlName="hotel_id" (change)="onHotelChange($event.target.value)">
+        <option *ngFor="let hotel of hotels" [value]="hotel.id">{{ hotel.name }}</option>
+      </select>
+  
+      <label>Habitación</label>
+      <select formControlName="room_id">
+        <option *ngFor="let room of rooms" [value]="room.id">{{ room.number }} - {{ room.room_type }}</option>
+      </select>
+  
+      <button type="submit" [disabled]="!reservationForm.valid">Reservar</button>
+    </form>
+  </div>
+  
