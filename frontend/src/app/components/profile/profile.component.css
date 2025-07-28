@@ -1,0 +1,13 @@
+.profile-container {
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #e9f0fb;
+    border-radius: 8px;
+    color: #004080;
+  }
+  
+  h2 {
+    margin-bottom: 15px;
+  }
+  
