@@ -1,1 +1,10 @@
-<p>reservation-list works!</p>
+<div class="reservation-list-container">
+    <h2>Mis Reservas</h2>
+    <ul *ngIf="reservations.length > 0; else noReservations">
+      <li *ngFor="let res of reservations">
+        Reserva #{{ res.id }} - Habitación: {{ res.room.number }} - Desde: {{ res.check_in }} Hasta: {{ res.check_out }} - Estado: {{ res.status }}
+      </li>
+    </ul>
+    <ng-template #noReservations>
+      <p>No tienes reservas activas.</p
+  
