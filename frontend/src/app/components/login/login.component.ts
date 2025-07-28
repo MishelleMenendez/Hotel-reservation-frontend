@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'] 
 })
 export class LoginComponent {
   email: string = '';
@@ -14,12 +15,14 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
-    this.authService.login(this.email, this.password).subscribe({
-      next: (res) => {
-        // Aquí podrías guardar un token, por ejemplo:
-        // localStorage.setItem('token', res.token);
+    this.errorMessage = '';
 
-        // Redirigir al home o dashboard
+    this.authService.login(this.email, this.password).subscribe({
+      next: (response) => {
+
+        localStorage.setItem('userId', response.user_id);
+        localStorage.setItem('role', response.role);
+
         this.router.navigate(['/']);
       },
       error: (err) => {

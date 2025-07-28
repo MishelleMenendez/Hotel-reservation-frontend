@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HotelService } from 'src/app/services/hotel.service';
-import { ReservationService } from 'src/app/services/reservation.service';
+import { HotelService } from '../../services/hotel.service';
+import { ReservationService } from '../..//services/reservation.service';
 
 @Component({
   selector: 'app-reservation-form',

@@ -1,33 +1,23 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'] 
-})
-export class LoginComponent {
-  email: string = '';
-  password: string = '';
-  errorMessage: string = '';
+import { LoginComponent } from './login.component';
 
-  constructor(private authService: AuthService, private router: Router) {}
+describe('LoginComponent', () => {
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
 
-  onSubmit(): void {
-    this.errorMessage = '';
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [LoginComponent]
+    })
+    .compileComponents();
 
-    this.authService.login(this.email, this.password).subscribe({
-      next: (response) => {
+    fixture = TestBed.createComponent(LoginComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-        localStorage.setItem('userId', response.user_id);
-        localStorage.setItem('role', response.role);
-
-        this.router.navigate(['/']);
-      },
-      error: (err) => {
-        this.errorMessage = 'Credenciales inválidas. Por favor intenta de nuevo.';
-      }
-    });
-  }
-}
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
