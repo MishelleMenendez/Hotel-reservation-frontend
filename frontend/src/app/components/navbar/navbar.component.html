@@ -1,1 +1,11 @@
-<p>navbar works!</p>
+<nav class="navbar">
+    <a routerLink="/" class="logo">HotelApp</a>
+    <div class="links">
+      <a routerLink="/hotels">Hoteles</a>
+      <a routerLink="/reservations">Mis Reservas</a>
+      <a routerLink="/profile">Perfil</a>
+      <a routerLink="/login" *ngIf="!isLoggedIn">Login</a>
+      <a (click)="logout()" *ngIf="isLoggedIn">Logout</a>
+    </div>
+  </nav>
+  
