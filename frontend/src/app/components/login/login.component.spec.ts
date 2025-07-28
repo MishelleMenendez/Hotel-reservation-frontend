@@ -1,23 +1,33 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
-import { LoginComponent } from './login.component';
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'] 
+})
+export class LoginComponent {
+  email: string = '';
+  password: string = '';
+  errorMessage: string = '';
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+  constructor(private authService: AuthService, private router: Router) {}
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [LoginComponent]
-    })
-    .compileComponents();
+  onSubmit(): void {
+    this.errorMessage = '';
 
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    this.authService.login(this.email, this.password).subscribe({
+      next: (response) => {
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+        localStorage.setItem('userId', response.user_id);
+        localStorage.setItem('role', response.role);
+
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        this.errorMessage = 'Credenciales inválidas. Por favor intenta de nuevo.';
+      }
+    });
+  }
+}
