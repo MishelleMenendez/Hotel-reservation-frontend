@@ -1,1 +1,20 @@
-<p>hotel-search works!</p>
+<div class="search-container">
+    <h2>Buscar Hoteles</h2>
+    <form (ngSubmit)="searchHotels()" #searchForm="ngForm">
+      <input type="text" placeholder="Ubicación" name="location" [(ngModel)]="location" required />
+      <input type="date" name="startDate" [(ngModel)]="startDate" required />
+      <input type="date" name="endDate" [(ngModel)]="endDate" required />
+      <button type="submit" [disabled]="searchForm.invalid">Buscar</button>
+    </form>
+  
+    <div *ngIf="hotels.length > 0" class="results">
+      <div *ngFor="let hotel of hotels" class="hotel-item" (click)="selectHotel(hotel)">
+        <h3>{{ hotel.name }}</h3>
+        <p>{{ hotel.location }}</p>
+        <p>Rating: {{ hotel.rating }}</p>
+      </div>
+    </div>
+  
+    <p *ngIf="hotels.length === 0 && searched">No se encontraron hoteles.</p>
+  </div>
+  
