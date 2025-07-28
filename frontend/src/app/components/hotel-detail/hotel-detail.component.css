@@ -1,0 +1,35 @@
+.hotel-detail-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fefefe;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #ddd;
+    color: #004080;
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+  }
+  
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  li {
+    margin-bottom: 8px;
+  }
+  
+  .available {
+    color: green;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  
+  .unavailable {
+    color: red;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  

@@ -1,1 +1,17 @@
-<p>hotel-detail works!</p>
+<div *ngIf="hotel" class="hotel-detail-container">
+    <h2>{{ hotel.name }}</h2>
+    <p><strong>Ubicación:</strong> {{ hotel.location }}</p>
+    <p><strong>Descripción:</strong> {{ hotel.description }}</p>
+    <p><strong>Rating:</strong> {{ hotel.rating }}</p>
+  
+    <h3>Habitaciones</h3>
+    <ul>
+      <li *ngFor="let room of hotel.rooms">
+        {{ room.number }} - {{ room.room_type }} - ${{ room.price }}
+        <span [class.available]="room.available" [class.unavailable]="!room.available">
+          {{ room.available ? 'Disponible' : 'No disponible' }}
+        </span>
+      </li>
+    </ul>
+  </div>
+  
