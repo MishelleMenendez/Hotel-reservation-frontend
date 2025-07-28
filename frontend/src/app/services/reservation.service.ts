@@ -2,40 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-export interface Reservation {
-  id: number;
-  check_in: string;
-  check_out: string;
-  status: string;
-  room_id: number;
-  created_at: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
-  private baseUrl = 'http://localhost:5000/reservations';
+  private apiUrl = 'http://localhost:5000/api/reservations';
 
   constructor(private http: HttpClient) {}
 
-  getUserReservations(userId: number): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.baseUrl}/?user_id=${userId}`);
+  getMyReservations(): Observable<any[]> {
+    const userId = localStorage.getItem('userId');
+    return this.http.get<any[]>(`${this.apiUrl}/user/${userId}`);
   }
 
-  createReservation(userId: number, roomId: number, checkIn: string, checkOut: string): Observable<any> {
-    return this.http.post(this.baseUrl + '/', { user_id: userId, room_id: roomId, check_in: checkIn, check_out: checkOut });
+  getReservationById(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`);
   }
 
-  updateReservation(reservationId: number, updates: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${reservationId}`, updates);
-  }
-
-  cancelReservation(reservationId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${reservationId}`);
-  }
-
-  getReservationDetails(reservationId: number): Observable<Reservation> {
-    return this.http.get<Reservation>(`${this.baseUrl}/${reservationId}`);
+  createReservation(reservationData: any): Observable<any> {
+    const userId = localStorage.getItem('userId');
+    return this.http.post(`${this.apiUrl}/user/${userId}`, reservationData);
   }
 }
