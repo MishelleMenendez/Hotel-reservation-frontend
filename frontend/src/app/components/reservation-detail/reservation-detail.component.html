@@ -1,1 +1,15 @@
-<p>reservation-detail works!</p>
+<div class="detail-container" *ngIf="reservation">
+    <h2>Detalle de la Reserva</h2>
+    <div class="detail-card">
+      <p><strong>Hotel:</strong> {{ reservation.hotel?.name }}</p>
+      <p><strong>Habitación:</strong> {{ reservation.room?.number }} - {{ reservation.room?.room_type }}</p>
+      <p><strong>Fecha de entrada:</strong> {{ reservation.check_in | date }}</p>
+      <p><strong>Fecha de salida:</strong> {{ reservation.check_out | date }}</p>
+      <p><strong>Usuario:</strong> {{ reservation.user?.username }}</p>
+      <button (click)="volver()">Volver</button>
+    </div>
+  </div>
+  
+  <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+  <app-error *ngIf="error"></app-error>
+  
