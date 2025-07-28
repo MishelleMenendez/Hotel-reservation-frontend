@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
+// Componentes
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { RestPasswordComponent } from './components/rest-password/rest-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HotelSearchComponent } from './components/hotel-search/hotel-search.component';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { HotelDetailComponent } from './components/hotel-detail/hotel-detail.component';
 import { ReservationListComponent } from './components/reservation-list/reservation-list.component';
 import { ReservationFormComponent } from './components/reservation-form/reservation-form.component';
@@ -19,16 +20,24 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ErrorComponent } from './components/error/error.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
+// Servicios
+import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
+import { HotelService } from './services/hotel.service';
+import { ReservationService } from './services/reservation.service';
+
+// Enrutamiento (agrega tu archivo routing.module.ts si lo tienes)
+import { AppRoutingModule } from './app-routing.module';
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    RestPasswordComponent,
+    ResetPasswordComponent,
     ProfileComponent,
     HotelSearchComponent,
-    ResetPasswordComponent,
     HotelDetailComponent,
     ReservationListComponent,
     ReservationFormComponent,
@@ -40,9 +49,17 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule // si tienes rutas
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    UserService,
+    HotelService,
+    ReservationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
