@@ -1,1 +1,11 @@
-<p>register works!</p>
+<div class="register-container">
+    <h2>Registrar Usuario</h2>
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
+      <input type="text" placeholder="Nombre" name="name" [(ngModel)]="name" required minlength="3" />
+      <input type="email" placeholder="Email" name="email" [(ngModel)]="email" required email />
+      <input type="password" placeholder="Contraseña" name="password" [(ngModel)]="password" required minlength="6" />
+      <button type="submit" [disabled]="registerForm.invalid">Registrar</button>
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+    </form>
+  </div>
+  
