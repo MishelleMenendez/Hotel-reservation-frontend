@@ -12,20 +12,19 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
+  private baseUrl = 'http://localhost:5000/auth'; // Cambia según tu backend
 
-  private apiUrl = 'http://localhost:5000/auth';  // Ajustar según backend
-
-  constructor(private http: HttpClient) { }
-
-  login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { email, password });
-  }
+  constructor(private http: HttpClient) {}
 
   register(name: string, email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, { name, email, password });
+    return this.http.post(`${this.baseUrl}/register`, { name, email, password });
+  }
+
+  login(email: string, password: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.baseUrl}/login`, { email, password });
   }
 
   resetPassword(email: string, newPassword: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/reset-password`, { email, new_password: newPassword });
+    return this.http.post(`${this.baseUrl}/reset-password`, { email, new_password: newPassword });
   }
 }
